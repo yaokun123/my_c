@@ -63,10 +63,10 @@ int main(){
         // 如果在读的过程中，对方已经关闭，返回0
         if(ret == 0){
             printf("client closed\n");
-            exit(0);
+            break;
         } else if(ret < 0){
             perror("read fail\n");
-            exit(0);
+            break;
         }else{
             printf("client data:");
             fputs(revbuf, stdout);
