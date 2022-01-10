@@ -18,6 +18,13 @@ int main(){
         exit(0);
     }
 
+    // 设置套接字选项-地址复用（解决服务端挂掉客户端没有挂掉，服务端无法重启）
+    int optval = 1;
+    if(setsockopt(socketfd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval)) == -1){
+        perror("setsockopt fail\n");
+        exit(0);
+    }
+
     // 2、绑定端口
     // sockaddr为通用的数据结构，sockaddr_in为具体的TCP/IP协议数据结构。大小相同可以强制转换
     struct sockaddr_in srvaddr;
