@@ -8,6 +8,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 int main(){
     // 1、创建服务端socket
@@ -24,6 +25,9 @@ int main(){
         perror("setsockopt fail\n");
         exit(0);
     }
+
+    // 设置非阻塞io
+    //fcntl(socketfd, F_SETFL, O_NONBLOCK);
 
     // 2、绑定端口
     // sockaddr为通用的数据结构，sockaddr_in为具体的TCP/IP协议数据结构。大小相同可以强制转换
