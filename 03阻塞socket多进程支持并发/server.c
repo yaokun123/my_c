@@ -29,6 +29,11 @@ int main(){
     // 设置非阻塞io
     //fcntl(socketfd, F_SETFL, O_NONBLOCK);
 
+
+    // 设置tcp层心跳包（默认2h）。  on 是 1 表示打开 keepalive 选项，为 0 表示关闭，0 是默认值
+    //int on = 1;
+    //setsockopt(socketfd, SOL_SOCKET, SO_KEEPALIVE, &on , sizeof(on));
+
     // 2、绑定端口
     // sockaddr为通用的数据结构，sockaddr_in为具体的TCP/IP协议数据结构。大小相同可以强制转换
     struct sockaddr_in srvaddr;
