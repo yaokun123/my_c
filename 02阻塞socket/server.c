@@ -12,7 +12,7 @@
 int main(){
     // 1、创建服务端socket
     int socketfd;
-    socketfd = socket(PF_INET, SOCK_STREAM, 0);
+    socketfd = socket(PF_INET, SOCK_STREAM, 0);// PF_INET = AF_INET
     if(socketfd == -1){
         perror("create socket fail\n");
         exit(0);
