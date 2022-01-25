@@ -64,6 +64,9 @@ int main(){
             perror("read fail\n");
             break;
         }
+
+        //// 2、要是客户端不理会read函数的返回值，反而写入更多的数据到服务器上，那又会发生什么？
+        //// 当一个进程想某个已收到RST的套接字执行写操作时，内核向该进程发送一个SIGPIPE信号，该信号的默认行为是终止进程。
         fputs(revbuf, stdout);
 
 
