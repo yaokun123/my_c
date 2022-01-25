@@ -47,9 +47,20 @@ int main(){
     // 3、收发数据
     char revbuf[1024] = {0};
     char sendbuf[1024] = {0};
+
+    //// 1、如果服务端断开连接，此时服务端会发送FIN包，客户端收到之后回复一个ACK包，这就是TCP连接终止工作的前半部分。
+    //// 然而问题是客户端进程阻塞在fgets调用上，等待从终端接收一行文本。此时服务端的状态为FIN_WAIT2、客户端的状态为CLOSE_WAIT
+
     while (fgets(sendbuf,sizeof(sendbuf),stdin) != NULL){
         write(socketfd, sendbuf, strlen(sendbuf));
-        read(socketfd, revbuf, sizeof(revbuf));
+        int res = read(socketfd, revbuf, sizeof(revbuf));
+        // 如果在读的过程中，对方已经关闭，返回0
+        if(res == 0){
+            break;
+        }else if(res < 0){
+            perror("read fail\n");
+            break;
+        }
         fputs(revbuf, stdout);
 
 
