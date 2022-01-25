@@ -51,7 +51,7 @@ void main(){
 //     #include <arpa/inet.h>
 //
 //     in_addr_t
-//     inet_addr(const char *cp);
+//     inet_addr(const char *cp);//如今inet_addr已被废除，新的代码应该该用inet_aton
 
 //
 //     int
