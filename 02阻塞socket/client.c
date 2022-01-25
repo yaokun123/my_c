@@ -50,6 +50,9 @@ int main(){
 
     //// 1、如果服务端断开连接，此时服务端会发送FIN包，客户端收到之后回复一个ACK包，这就是TCP连接终止工作的前半部分。
     //// 然而问题是客户端进程阻塞在fgets调用上，等待从终端接收一行文本。此时服务端的状态为FIN_WAIT2、客户端的状态为CLOSE_WAIT
+    //// 此时如果客户端再发送，客户TCP接着把数据发送给服务器。TCP允许这么做。
+    //// 当服务器TCP接受到来自客户端的数据时，既然先前打开那个套接字的进程已经终止，于是响应一个RST。
+    //// 然而客户进程看不到这个RST，因为他在调用write后立即调用了read，此时立即返回0，然后客户端结束。
 
     while (fgets(sendbuf,sizeof(sendbuf),stdin) != NULL){
         write(socketfd, sendbuf, strlen(sendbuf));
