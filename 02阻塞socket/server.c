@@ -13,6 +13,21 @@ int main(){
     // 1、创建服务端socket
     int socketfd;
     socketfd = socket(PF_INET, SOCK_STREAM, 0);// PF_INET = AF_INET
+    //// 1、socket函数的family常值
+    // PF_INET = AF_INET        ipv4协议
+    // PF_INET6 = AF_INET6      ipv6协议
+    // PF_LOCAL = AF_LOCAL      unix域协议
+    // PF_ROUTE = AF_ROUTE      路由套接字
+    // PF_KEY = pseudo_AF_KEY   密钥套接字
+    //// 2、socket函数的type常值
+    // SOCK_STREAM              字节流套接字
+    // SOCK_DGRAM               数据报套接字
+    // SOCK_RAW                 有序分组套接字
+    // SOCK_SEQPACKET           原始套接字
+    //// 3、socket函数AF_INET或AF_INET6的protocol常值
+    // IPPROTO_IP 0             TCP传输协议
+    // IPPROTO_UDP 17           UDP传输协议
+    // IPPROTO_SCTP 132         SCTP传输协议
     if(socketfd == -1){
         perror("create socket fail\n");
         exit(0);
