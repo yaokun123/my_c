@@ -26,6 +26,7 @@ int main(){
     srvaddr.sin_port = htons(8001);
     srvaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
     connect(socketfd, (struct sockaddr *)&srvaddr, sizeof(srvaddr));
+    //// 客户在调用函数connect前不必非得调用bind函数，因为如果需要的话，内核会确定源IP地址，并选择一个临时端口作为源端口
 
 
     /*int keepAlive = 1; // 开启keepalive属性
