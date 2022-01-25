@@ -60,3 +60,12 @@ void main(){
 //
 //     char *
 //     inet_ntoa(struct in_addr in);
+
+
+//// 新函数
+// int inet_pton(int af, const char *src, void *dst);
+// af:AF_INET|AF_INET6
+
+
+//const char *inet_ntop(int af, const void *src,char *dst, socklen_t size);
+// af:AF_INET|AF_INET6
