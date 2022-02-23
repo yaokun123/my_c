@@ -9,7 +9,7 @@
 
 int socketpair(int domain, int type, int protocol, int sv[2]);
 
-// 这个方法可以创建一对关联的套接字 sv[2]
+// 这个方法可以创建一对关联的套接字 sv[2]，它是使用本机套接字实现的。
 // domain：表示域，在 Linux 下通常取值为 AF_UNIX
 // type：取值为 SOCK_STREAM 或 SOCK_DGRAM，它表示在套接字上使用的是 TCP 还是 UDP
 // protocol：必须传递 0；
