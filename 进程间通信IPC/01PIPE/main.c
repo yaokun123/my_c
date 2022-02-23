@@ -24,6 +24,16 @@
 // 3、写端不关闭，但是也不写数据，读端不关闭：此时管道中剩余的数据都被读取之后再次read会被阻塞，直到管道中有数据可读了才重新读取数据并返回
 // 4、读端不关闭，但是也不读取数据，写端不关闭：此时当写端被写满之后再次write会阻塞，直到管道中有空位置了才会写入数据并重新返回
 
+
+//// 示例
+// redis 在进行aof重写的时候主进程和子进程会使用pipe匿名管道通信，由于是单向通信，所以会创建出三个管道
+// int fds[6] = {-1, -1, -1, -1, -1, -1};
+// int j;
+//
+// if (pipe(fds) == -1) goto error; /* parent -> children data. */
+// if (pipe(fds+2) == -1) goto error; /* children -> parent ack. */
+// if (pipe(fds+4) == -1) goto error; /* children -> parent ack. */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
