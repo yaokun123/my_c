@@ -23,6 +23,11 @@
 // semctrl
 
 
+//// 共享内存的特点
+// 1、共享内存创建后，一直存在于内核中，直到被删除或系统关闭
+// 2、共享内存和管道不一样，读取后，内容仍在共享内存中。
+
+
 // 共享内存的创建/打开
 #include <sys/ipc.h>
 #include <sys/shm.h>
@@ -66,6 +71,18 @@ int main(){
 //// 能不能用read,write呢？
 //// 为了方便用户空间对共享内存的操作，使用地址映射的方式
 void *shmat(int shmid, const void *shmaddr, int shmflg);
-// shmid，ID号
-// 映射到的地址。可以自己指定映射的地址，NULL为系统自动完成的映射
+// 参数一：shmid，ID号
+// 参数二：映射到的地址。可以自己指定映射的地址，NULL为系统自动完成的映射
+// 参数三：SHM_RDONLY共享内存只读，默认是0表示共享内存可读写。
 // 返回值类似与malloc
+
+
+//// 将进程里的地址映射删除（用户空间地址）
+int shmdt(const void *);
+
+
+//// 删除共享内存对象
+int shmctl(int shmid, int cmd, struct shmid_ds *buf);
+// 参数一：shmid，ID号
+// 参数二：cmd IPC_STAT（获取对象属性）/IPC_SET（设置对象属性）/IPC_RMID（删除对象）
+// 参数三：指定IPC_STAT/IPC_SET时用于保存/设置属性
