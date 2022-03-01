@@ -25,14 +25,15 @@ int semget(key_t key, int nsems, int semflg);
 // 参数二：结构体数组
 // 参数三：表明了数组的中有几个结构
 struct sembuf {
-    short sem_num;              // 信号量编号。除非你要使用一组信号量，否则它的取值一般为0。
+    short sem_num;              // 信号量编号。除非你要使用一组信号量，否则它的取值一般为0。（信号量的下标）
 
     short sem_op;               // 为信号量再一次操作中需要改变的数值。通常只会用到两个：P操作-1，V操作+1。
-                                // 当然，你也可以用一个非1的数值改变信号量。
+                                // 当然，你也可以用一个非1的数值改变信号量。（操作方式 -1 / 1）
 
     short sem_flg;              // 通常被设置为SEM_UNDO。它会让系统跟踪当前进程对这个信号量的修改情况，
                                 // 如果这个进程在没有释放信号量的情况下终止，则操作系统将会自动释放该进程持有的信号量。
                                 // 所以如果你对信号量没有特殊要求，请一定将sem_flg设置成SEM_UNDO。
+                                // （等待方式: 0:阻塞方式 IPC_NOWAIT:非阻塞方式）
 };
 int semop(int semid, struct sembuf *sops, unsigned nsops);
 
