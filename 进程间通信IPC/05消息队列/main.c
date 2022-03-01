@@ -17,7 +17,7 @@ int msgget(key_t key, int msgflg);
 // 如果使用IPC_PRIVATE创建共享内存，key的值始终都是0x00000000，而使用ftok()函数创建key不为0，参数不一样key也不一样
 // 类似于无名管道与有名管道的区别，IPC_PRIVATE只能用于有亲缘关系的进程之间的通信，ftok()可用于无亲缘关系进程的通信
 int main(){
-    int msgid = msgget(IPC_PRIVATE,077);
+    int msgid = msgget(IPC_PRIVATE,0777);
     if(msgid < 0){
         printf("create message queue failure\n");
         return -1;
