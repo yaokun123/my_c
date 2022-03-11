@@ -10,9 +10,11 @@
  *
  */
 void main(){
-    unsigned int data = 0x12345678;
-    char *p = &data;
+                            // 大端        0    1    2    3
+    unsigned int data = 0x12345678;   // 0x12 0x34 0x56 0x78
+                            // 小端        3    2   1     0
 
+    char *p = &data;
     printf("%x %x %x %x\n", p[0], p[1], p[2], p[3]);
 
     if(p[0] == 0x78){
