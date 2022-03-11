@@ -2,6 +2,8 @@
 // Created by 姚坤 on 2022/3/11.
 //
 
+// 多线程：可见性、有序性、原子性
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdbool.h>
