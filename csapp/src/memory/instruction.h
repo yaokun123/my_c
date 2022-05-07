@@ -3,11 +3,13 @@
 #define NUM_INSTRTYPE 30
 typedef enum OP{
     MOV_REG_REG,    // 0
-    PUSH_REG,   // 1
-    CALL,   // 2
-    ADD_REG_REG, // 3
-    MOV_REG_MEM,
-    EMPTY
+    MOV_REG_MEM,    // 1
+    MOV_MEM_REG,    // 2
+    PUSH_REG,       // 3
+    POP_REG,        // 4
+    CALL,           // 5
+    RET,            // 6
+    ADD_REG_REG    // 7
 } op_t;
 
 // pointer pointing to the function
@@ -27,7 +29,8 @@ typedef enum OD_TYPE{
     MM_REG2_S,
     MM_IMM_REG2_S,
     MM_REG1_REG2_S,
-    MM_IMM_REG1_REG2_S
+    MM_IMM_REG1_REG2_S,
+    EMPTY
 } od_type_t;
 
 typedef struct OD{
@@ -50,4 +53,6 @@ typedef struct INSTRUCT_STRUCT{
 uint64_t decode_od(od_t od);
 
 void instruction_cycle();
+
+void init_handler_table();
 

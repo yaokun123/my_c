@@ -7,46 +7,67 @@ inst_t program[INST_LEN] = {
                 PUSH_REG,
                 {REG, 0, 0, (uint64_t *)&reg.rbp, NULL},
                 {EMPTY, 0, 0, NULL, NULL},
-                "push %rbp"
+                "push \\%rbp"
         },
         {
                 MOV_REG_REG,
                 {REG, 0, 0, (uint64_t *)&reg.rsp, NULL},
                 {REG, 0, 0, (uint64_t *)&reg.rbp, NULL},
-                "mov %rsp,%rbp"
+                "mov \\%rsp,\\%rbp"
         },
         {
                 MOV_REG_MEM,
                 {REG, 0, 0, (uint64_t *)&reg.rdi, NULL},
                 {MM_IMM_REG, -0x18, 0, (uint64_t *)&reg.rbp, NULL},
-                "mov %rdi,-0x18(%rbp)"
+                "mov \\%rdi,-0x18(\\%rbp)"
         },
         {
                 MOV_REG_MEM,
                 {REG, 0, 0, (uint64_t *)&reg.rsi, NULL},
                 {MM_IMM_REG, -0x20, 0, (uint64_t *)&reg.rbp, NULL},
-                "mov %rsi,-0x20(%rbp)"
+                "mov \\%rsi,-0x20(\\%rbp)"
         },
         {
-            "mov -0x18(%rbp),%rdx"
+                MOV_MEM_REG,
+                {MM_IMM_REG, -0x18, 0, (uint64_t *)&reg.rbp, NULL},
+                {REG, 0, 0, (uint64_t *)&reg.rdx, NULL},
+                "mov -0x18(\\%rbp),\\%rdx"
         },
         {
-            "mov -0x20(%rbp),%rax"
+                MOV_MEM_REG,
+                {MM_IMM_REG, -0x20, 0, (uint64_t *)&reg.rbp, NULL},
+                {REG, 0, 0, (uint64_t *)&reg.rax, NULL},
+                "mov -0x20(\\%rbp),\\%rax"
         },
         {
-            "add %rdx,%rax"
+                ADD_REG_REG,
+                {REG, 0, 0, (uint64_t *)&reg.rdx, NULL},
+                {REG, 0, 0, (uint64_t *)&reg.rax, NULL},
+                "add \\%rdx,\\%rax"
         },
         {
-            "mov %rax,-0x8(%rbp)"
+                MOV_REG_MEM,
+                {REG, 0, 0, (uint64_t *)&reg.rax, NULL},
+                {MM_IMM_REG, -0x8, 0, (uint64_t *)&reg.rbp, NULL},
+                "mov \\%rax,-0x8(\\%rbp)"
         },
         {
-            "mov -0x8(%rbp),%rax"
+                MOV_MEM_REG,
+                {MM_IMM_REG, -0x8, 0, (uint64_t *)&reg.rbp, NULL},
+                {REG, 0, 0, (uint64_t *)&reg.rax, NULL},
+                "mov -0x8(\\%rbp),\\%rax"
         },
         {
-            "pop %rbp"
+                POP_REG,
+                {REG, 0, 0, (uint64_t *)&reg.rbp, NULL},
+                {EMPTY, 0, 0, NULL, NULL},
+                "pop \\%rbp"
         },
         {
-            "retq"
+                POP_REG,
+                {EMPTY, 0, 0, NULL, NULL},
+                {EMPTY, 0, 0, NULL, NULL},
+                "retq"
         },
 
         // main entry point
@@ -54,15 +75,24 @@ inst_t program[INST_LEN] = {
                 MOV_REG_REG,
                 {REG, 0, 0, (uint64_t *)&reg.rdx, NULL},
                 {REG, 0, 0, (uint64_t *)&reg.rsi, NULL},
-                "mov %rdx,%rsi"
+                "mov \\%rdx,\\%rsi"
         },
         {
-            "mov %rax,%rdi"
+                MOV_REG_REG,
+                {REG, 0, 0, (uint64_t *)&reg.rax, NULL},
+                {REG, 0, 0, (uint64_t *)&reg.rdi, NULL},
+                "mov \\%rax,\\%rdi"
         },
         {
-            "callq 5fa <add>"
+                CALL,
+                {IMM, (uint64_t)&(program[0]), 0, NULL, NULL},
+                {EMPTY, 0, 0, NULL, NULL},
+                "callq 5fa <add>"
         },
         {
-            "mov %rax,-0x8(%rbp)"
+                MOV_REG_MEM,
+                {REG, 0, 0, (uint64_t *)&reg.rax, NULL},
+                {MM_IMM_REG, -0x8, 0, (uint64_t *)&reg.rbp, NULL},
+                "mov \\%rax,-0x8(\\%rbp)"
         }
 };
