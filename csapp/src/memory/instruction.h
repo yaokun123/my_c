@@ -2,16 +2,19 @@
 
 #define NUM_INSTRTYPE 30
 typedef enum OP{
-    MOV,    // 0
-    PUSH,   // 1
+    MOV_REG_REG,    // 0
+    PUSH_REG,   // 1
     CALL,   // 2
-    ADD_REG_REG //3
+    ADD_REG_REG, // 3
+    MOV_REG_MEM,
+    EMPTY
 } op_t;
 
 // pointer pointing to the function
 typedef void (*handler_t)(uint64_t,uint64_t);
 handler_t handler_table[NUM_INSTRTYPE];
 void add_reg_reg_handler(uint64_t src,uint64_t dst);
+void mov_reg_reg_handler(uint64_t src,uint64_t dst);
 
 typedef enum OD_TYPE{
     IMM,

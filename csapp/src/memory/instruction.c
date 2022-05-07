@@ -67,6 +67,13 @@ void instruction_cycle(){
 // 初始化指令的函数指针
 void init_handler_table(){
     handler_table[ADD_REG_REG] = &add_reg_reg_handler;
+    handler_table[MOV_REG_REG] = &mov_reg_reg_handler;
+}
+void mov_reg_reg_handler(uint64_t src,uint64_t dst){
+    *(uint64_t *)dst = *(uint64_t *)src;
+
+    // 更新pc计数器
+    reg.rip = reg.rip + sizeof(inst_t);
 }
 
 void add_reg_reg_handler(uint64_t src,uint64_t dst){
