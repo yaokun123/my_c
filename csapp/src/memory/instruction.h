@@ -9,7 +9,7 @@ typedef enum OP{
     POP_REG,        // 4
     CALL,           // 5
     RET,            // 6
-    ADD_REG_REG    // 7
+    ADD_REG_REG,    // 7
 } op_t;
 
 // pointer pointing to the function
