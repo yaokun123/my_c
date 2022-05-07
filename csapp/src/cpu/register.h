@@ -1,3 +1,10 @@
+//
+// Created by 姚坤 on 2022/5/7.
+//
+
+#ifndef MY_C_REGISTER_H
+#define MY_C_REGISTER_H
+
 #include <stdint.h>
 
 // 寄存器结构
@@ -66,3 +73,5 @@ typedef struct REG_STRUCT{
 
 // 定义一个寄存器
 reg_t reg;
+
+#endif //MY_C_REGISTER_H

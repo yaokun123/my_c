@@ -1,3 +1,10 @@
+//
+// Created by 姚坤 on 2022/5/7.
+//
+
+#ifndef MY_C_INSTRUCTION_H
+#define MY_C_INSTRUCTION_H
+
 #include <stdint.h>
 
 #define NUM_INSTRTYPE 30
@@ -56,3 +63,6 @@ void instruction_cycle();
 
 void init_handler_table();
 
+
+
+#endif //MY_C_INSTRUCTION_H
