@@ -61,7 +61,7 @@ void instruction_cycle(){
     // add_reg_reg_handler(src = &rax,dst = &rbx)
     handler(src,dst);
 
-    printf("%p\n",inst);
+    printf("%s\n", inst->code);
 }
 
 // 初始化指令的函数指针
