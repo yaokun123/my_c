@@ -18,7 +18,7 @@ uint64_t decode_od(od_t od){
         uint64_t vaddr = 0;
 
         if(od.type == MM_IMM){
-            vaddr = od.imm;
+            vaddr = *((uint64_t *)&od.imm);
         }else if(od.type == MM_REG){
             vaddr = *(od.reg1);
         }else if(od.type == MM_IMM_REG){
