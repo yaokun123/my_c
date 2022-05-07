@@ -68,6 +68,14 @@ void instruction_cycle(){
 void init_handler_table(){
     handler_table[ADD_REG_REG] = &add_reg_reg_handler;
     handler_table[MOV_REG_REG] = &mov_reg_reg_handler;
+    handler_table[CALL] = &call_handler;
+}
+void call_handler(uint64_t src,uint64_t dst){
+    reg.rsp = reg.rsp - 8;
+
+    write64bits_dram(va2pa(reg.rsp), reg.rip+sizeof(inst_t));
+
+    reg.rip = src;
 }
 void mov_reg_reg_handler(uint64_t src,uint64_t dst){
     *(uint64_t *)dst = *(uint64_t *)src;
