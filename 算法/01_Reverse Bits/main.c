@@ -54,6 +54,37 @@ void test_dictScan_cursor(int tablesize){ // 8 16 32
     printf("\b\b\b\b\b     \n");
 }
 
+void test_dictScan_iter(int smalltablesize, int largetablesize){// 8 32
+    unsigned long v;
+    unsigned long m0, m1;
+
+    v = 0;
+    m0 = smalltablesize-1;
+    m1 = largetablesize-1;
+
+    do{
+        printf("\nsmall v is: ");
+        printbits(v & m0, (int)log2(smalltablesize));
+        printf("\n");
+
+        do{
+            printf("large v is: ");
+            printbits(v & m1, (int)log2(largetablesize));
+            printf("\n");
+
+            //v = (((v | m0) + 1) & ~m0) | (v & m0);
+            v = (((v | m0) + 1)) | (v & m0);
+        } while (v & (m0 ^ m1));
+
+
+        v |= ~m0;
+        v = rev(v);
+        v++;
+        v = rev(v);
+
+    } while (v != 0);
+}
+
 int main(){
     unsigned a = 25;
     unsigned b = 99;
@@ -72,6 +103,8 @@ int main(){
     test_dictScan_cursor(8);
     test_dictScan_cursor(16);
     test_dictScan_cursor(32);
+
+    test_dictScan_iter(8,64);
 }
 
 
