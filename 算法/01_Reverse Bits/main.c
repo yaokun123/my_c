@@ -1,5 +1,6 @@
 //// 翻转无符号整型
 #include <stdio.h>
+#include <math.h>
 #include "print_binary.h"
 
 //// 这个算法是 redis的dictScan 方法使用的
@@ -29,6 +30,30 @@ static unsigned long rev_2(unsigned long v){
 }
 
 
+void test_dictScan_cursor(int tablesize){ // 8 16 32
+    unsigned long v;
+    unsigned long m0;
+
+    v = 0;
+    m0 = tablesize-1;
+
+    printbits(v, (int)log2(tablesize));
+    printf("  -->  ");
+
+    do{
+        v |= ~m0;
+        v = rev_2(v);
+        v++;
+        v = rev_2(v);
+
+
+        printbits(v,(int)log2(tablesize));
+        printf(" --> ");
+    }while (v != 0);
+
+    printf("\b\b\b\b\b     \n");
+}
+
 int main(){
     unsigned a = 25;
     unsigned b = 99;
@@ -43,7 +68,14 @@ int main(){
     print_binary(a,1);
     print_binary(b,0);
     print_binary(b,1);
+
+    test_dictScan_cursor(8);
+    test_dictScan_cursor(16);
+    test_dictScan_cursor(32);
 }
+
+
+
 
 
 
