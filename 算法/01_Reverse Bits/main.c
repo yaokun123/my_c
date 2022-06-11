@@ -1,4 +1,4 @@
-//// 翻转无符号整型
+//// 翻转无符号整型二进制
 #include <stdio.h>
 #include <math.h>
 #include "print_binary.h"
