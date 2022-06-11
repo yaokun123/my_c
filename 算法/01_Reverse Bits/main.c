@@ -91,7 +91,7 @@ static unsigned short rev_test_mask(unsigned short v) {
     unsigned short mask = ~0;
     while ((s >>= 1) > 0) {
         mask ^= (mask << s);
-        printf("%x\n", mask);
+        printf("0x%04x\n", mask);
         v = ((v >> s) & mask) | ((v & mask) << s);
     }
     return v;
