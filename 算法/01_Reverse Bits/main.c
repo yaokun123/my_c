@@ -85,6 +85,18 @@ void test_dictScan_iter(int smalltablesize, int largetablesize){// 8 32
     } while (v != 0);
 }
 
+
+static unsigned short rev_test_mask(unsigned short v) {
+    unsigned short s = 8 * sizeof(v);
+    unsigned short mask = ~0;
+    while ((s >>= 1) > 0) {
+        mask ^= (mask << s);
+        printf("%x\n", mask);
+        v = ((v >> s) & mask) | ((v & mask) << s);
+    }
+    return v;
+}
+
 int main(){
     unsigned a = 25;
     unsigned b = 99;
@@ -105,6 +117,8 @@ int main(){
     test_dictScan_cursor(32);
 
     test_dictScan_iter(8,64);
+
+    rev_test_mask(18);
 }
 
 
