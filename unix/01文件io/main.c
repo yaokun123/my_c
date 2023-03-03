@@ -10,6 +10,7 @@
 #include <string.h>
 
 /**
+ * io fd
  * 不带buf的文件读写操作，建议一次操作4096 bytes
  * @return
  */
