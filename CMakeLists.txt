@@ -4,4 +4,4 @@ project(my_c C)
 set(CMAKE_C_STANDARD 99)
 
 
-add_executable(my_c unix/01文件io/main.c)
+add_executable(my_c unix/02文件和目录/main.c)
