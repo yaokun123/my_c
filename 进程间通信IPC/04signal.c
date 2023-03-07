@@ -1,4 +1,8 @@
 //
+// Created by 姚坤 on 2023/3/7.
+//
+
+//
 // Created by 姚坤 on 2022/2/24.
 //
 #include <stdio.h>
@@ -12,9 +16,9 @@
 // int kill(pid_t pid, int sig);
 // int raise(int sig);                  // 发信号给自己 == kill(getpid(), sig)
 // unsigned int alarm(unsigned int seconds); // 发送闹钟信号的函数（只会发一种信号SIGALRM）,默认操作是终止进程
-                                             // 该信号当一个定时器到时的时候发出
-                                             // 只能发送信号给当前进程，不能发送给其他进程
-int main_1(){
+// 该信号当一个定时器到时的时候发出
+// 只能发送信号给当前进程，不能发送给其他进程
+int main(){
     //printf("raise before");
     printf("raise before\n");           // 打印需要加上\n来刷新行缓存
     raise(9);                           // 调用的是系统函数_exit() 而不是库函数exit()
