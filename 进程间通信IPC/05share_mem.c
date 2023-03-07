@@ -1,10 +1,14 @@
 //
+// Created by 姚坤 on 2023/3/7.
+//
+
+//
 // Created by 姚坤 on 2022/2/25.
 //
 
 //// IPC通信包括共享内存、消息队列、信号灯
 //// 查看IPC对象 ipcs -m           -q(消息队列)    -s(信号灯)
-//// s删除IPC对象 ipcrm -m id
+//// 删除IPC对象 ipcrm -m id
 // 1、打开或创建IPC通道 -> open
 // Msg_get（消息队列）
 // Shm_get（共享内存）
@@ -34,8 +38,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-int shmget(key_t key, size_t size, int shmflg);
-key_t ftok(const char *pathname, int proj_id);
+// int shmget(key_t key, size_t size, int shmflg);
+// key_t ftok(const char *pathname, int proj_id);
 // key:IPC_PRIVATE 或 ftok返回值
 // size:共享内存区大小
 // shmflg:同open函数的权限位，也可以用8进制表示法
@@ -47,15 +51,20 @@ key_t ftok(const char *pathname, int proj_id);
 // 类似于无名管道与有名管道的区别，IPC_PRIVATE只能用于有亲缘关系的进程之间的通信，ftok()可用于无亲缘关系进程的通信
 
 int main(){
+    /*shmctl(65539, IPC_RMID, NULL);
+    return 1;*/
+
     //int shmid = shmget(IPC_PRIVATE,128,0777);
     //int shmid = shmget(key,128,0777);
 
 
-    int key = ftok("./a.c",'a');
+    int key = ftok("/tmp/demo.log",'a');
     if(key < 0){
-        printf("create key failure\n");
+        perror("");
+        return -1;
     }
     printf("create key success key=%X\n",key);
+    // key = IPC_PRIVATE;
     int shmid = shmget(key,128,IPC_CREAT | 0777);
 
     if(shmid < 0){
