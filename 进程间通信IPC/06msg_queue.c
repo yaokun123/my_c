@@ -1,4 +1,8 @@
 //
+// Created by 姚坤 on 2023/3/7.
+//
+
+//
 // Created by 姚坤 on 2022/1/28.
 //
 
@@ -12,6 +16,3 @@
 // 4、msgctl函数，在一个消息队列上的各种控制操作。
 
 #include <sys/msg.h>
-
-
-
