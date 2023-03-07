@@ -20,11 +20,12 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
 
 
 int main(){
     // 而进程2不需要创建管道文件, 打开进程1创建的并获取文件描述符、接着进行用描述符来写管道文件
-    char buf[10] = {};
+    char buf[100] = {};
 
     // 直接打开管道文件 写
     int fd = open("/tmp/a.fifo",O_WRONLY);
@@ -35,9 +36,16 @@ int main(){
 
     // 写管道
     while (1){
-        printf("请输入：");
+        printf("请输入（100个字符以内）：");
         fgets(buf, sizeof(buf), stdin);
-        write(fd,buf,sizeof(buf));
+
+        int len = write(fd,buf,strlen(buf));
+        printf("写入长度：%d\n", len);
+
+        int cmp = strcmp(buf, "exit\n");
+        if(cmp == 0){
+            break;
+        }
     }
     close(fd);
     return 0;

@@ -30,7 +30,7 @@ int main(){
     int res = mkfifo("/tmp/a.fifo",0666);
     if(res == -1){
         perror("mkfifo");
-        exit(-1);
+        // exit(-1);
     }
 
     // 打开管道文件 读
@@ -47,6 +47,7 @@ int main(){
             break;
         }
         printf("buf = %s\n",buf);
+        printf("len = %d \n", res);
     }
     close(fd);
 
