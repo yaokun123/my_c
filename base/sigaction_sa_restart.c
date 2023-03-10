@@ -6,6 +6,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 
 int sigaction(int signum, const struct sigaction *act,
               struct sigaction *oldact);
@@ -34,6 +35,15 @@ int main(){
 //    }
 //    printf("read len=%d %s\n", rdl, buf);
 
-    sleep(100);
+    // sleep(100);
+
+    unsigned int sl = 100;
+    while (sl){
+        sl = sleep(sl);
+        if (errno != EINTR){
+            break;
+        }
+        printf("remaining %u\n", sl);
+    }
     return 0;
 }
