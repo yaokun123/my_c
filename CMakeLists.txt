@@ -12,6 +12,7 @@ file(GLOB DEMO_RESOURCE
         )
 file(GLOB BASE_RESOURCE
         base/*.c
+        base/sort/*.c
         )
 
 # 遍历可运行的代码目录，并将这些文件添加到可运行里边
@@ -28,7 +29,17 @@ endforeach()
 
 foreach(FILE_PATH ${BASE_RESOURCE})
     STRING(REGEX REPLACE ".+/(.+)\\..*" "\\1" FILE_NAME ${FILE_PATH})
-    add_executable(${FILE_NAME} ${FILE_PATH})
+    if (${FILE_NAME} EQUAL "000print_array")
+        continue()
+    endif ()
+
+    if (${FILE_PATH} MATCHES .*sort.*)
+        message(${FILE_PATH})
+        add_executable(${FILE_NAME} ${FILE_PATH} ${CMAKE_SOURCE_DIR}/base/sort/000print_array.c)
+    else()
+        add_executable(${FILE_NAME} ${FILE_PATH})
+    endif ()
+
 endforeach()
 
 
