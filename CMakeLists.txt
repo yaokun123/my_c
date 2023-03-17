@@ -35,7 +35,7 @@ foreach(FILE_PATH ${BASE_RESOURCE})
 
     if (${FILE_PATH} MATCHES .*sort.*)
         message(${FILE_PATH})
-        add_executable(${FILE_NAME} ${FILE_PATH} ${CMAKE_SOURCE_DIR}/base/sort/000print_array.c)
+        add_executable(${FILE_NAME} ${FILE_PATH} ${CMAKE_SOURCE_DIR}/base/sort/000tool.c)
     else()
         add_executable(${FILE_NAME} ${FILE_PATH})
     endif ()
