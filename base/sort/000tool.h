@@ -10,5 +10,6 @@ void swap(int array[], int i1, int i2, int *swap_count);
 int cmp(int num_1, int num_2, int * cmp_count);
 long long get_current_timestamp();
 int * copy_array(int array[], int len);
+int * random_array(int len);
 
 #endif //MY_C_000TOOL_H

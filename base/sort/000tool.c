@@ -5,6 +5,14 @@
 #include <sys/time.h>
 #include <stdlib.h>
 #include <string.h>
+int * random_array(int len){
+    int size = sizeof(int) * len;
+    int * address = (int *)malloc(size);
+    for(int i=0;i<len;i++){
+        address[i] = rand();
+    }
+    return address;
+}
 void print_array(int array[], int len){
     printf("[");
     for(int i=0; i<len; i++){
