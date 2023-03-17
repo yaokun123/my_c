@@ -3,6 +3,8 @@
 //
 #include <stdio.h>
 #include <sys/time.h>
+#include <stdlib.h>
+#include <string.h>
 void print_array(int array[], int len){
     printf("[");
     for(int i=0; i<len; i++){
@@ -35,4 +37,13 @@ long long get_current_timestamp(){
     tmp = 1000*tmp;
     tmp = tmp + tv.tv_usec;
     return tmp;
+}
+
+void * copy_array(int array[], int len){
+    if (len == 0) return NULL;
+    int size = sizeof(int) * len;
+
+    void * address = malloc(size);
+    memcpy(address, array, size);
+    return address;
 }

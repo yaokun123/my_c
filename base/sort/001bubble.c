@@ -42,14 +42,5 @@ void bubble_2(int a[], int len){
     printf("bubble_2 cmp count num = %d\n", cmp_count);
 }
 
-int main(){
-    int a[] = {5, 8, 1, 10, 3, 2, 111};
-    int len = sizeof(a)/sizeof(int);
-    print_array(a, len);
-    bubble_2(a, len);
-    print_array(a, len);
-    return 0;
-}
-
 
 

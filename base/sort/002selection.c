@@ -20,7 +20,7 @@ void selection(int array[], int len){
     }
 }
 
-int main(){
+int main_2(){
     int a[] = {5, 8, 1, 10, 3, 2, 111};
     int len = sizeof(a)/sizeof(int);
     print_array(a, len);
