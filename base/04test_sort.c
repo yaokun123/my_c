@@ -17,7 +17,7 @@ int main(){
     bubble_2(a1, len);
     // print_array(a1, len);
 
-    bubble(a2, len);
+    // bubble(a2, len);
     // print_array(a2, len);
 
     selection(a3, len);
