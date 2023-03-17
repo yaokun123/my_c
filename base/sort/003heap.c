@@ -8,11 +8,26 @@ int swap_count = 0;
 int cmp_count = 0;
 int loop_count = 0;
 
+//// 完全二叉树的几个性质
+// 1、已知父节点位置i，求子节点位置。左节点2i+1，右节点2i+2
+// 2、已知子节点位置i，求父节点位置。(i-1) >> 1
+// 3、
+// n = n0 + n1 + n2;
+//                          n2 + 1 = n0;
+// 2n2 + n1 + 1 = n;
+
+// 上滤
 void siftUp(int array[], int index){
 
 }
 
 
+/**
+ * 下滤
+ * @param array
+ * @param index
+ * @param len
+ */
 void siftDown(int array[], int index, int len){
     while (1){
         loop_count++;
@@ -43,9 +58,11 @@ void siftDown(int array[], int index, int len){
     }
 }
 
-// 左节点2i+1
-// 右节点2i+2
-
+/**
+ * 批量建堆
+ * @param array
+ * @param len
+ */
 void bulk_creat_heap(int array[], int len){
     // 自下而上的下滤
     for (int i=(len-2) >> 1; i>=0; i--){
@@ -55,6 +72,11 @@ void bulk_creat_heap(int array[], int len){
 }
 
 
+/**
+ * 堆排序
+ * @param array
+ * @param len
+ */
 void heap_sort(int array[], int len){
     long long start = get_current_timestamp();
     bulk_creat_heap(array, len);
