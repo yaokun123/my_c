@@ -39,11 +39,11 @@ long long get_current_timestamp(){
     return tmp;
 }
 
-void * copy_array(int array[], int len){
+int * copy_array(int array[], int len){
     if (len == 0) return NULL;
     int size = sizeof(int) * len;
 
     void * address = malloc(size);
     memcpy(address, array, size);
-    return address;
+    return (int *)address;
 }
