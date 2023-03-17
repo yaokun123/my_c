@@ -6,40 +6,42 @@
 
 void bubble(int a[], int len){
     int swap_count = 0;
+    int cmp_count = 0;
+    int loop_count = 0;
+    long long start = get_current_timestamp();
     for(int i=0;i<len;i++){
         for(int j=0; j<len-i-1;j++){
-            if(a[j] > a[j+1]){
+            loop_count++;
+            if(cmp(a[j], a[j+1], &cmp_count) > 0){
                 swap(a, j, j+1, &swap_count);
             }
         }
     }
+    long long end = get_current_timestamp();
+    printf("bubble time take = %lld(ms), swap count num = %d, cmp count num = %d, loop count num = %d\n", end-start, swap_count, cmp_count, loop_count);
 }
 
 
 void bubble_2(int a[], int len){
     int swap_count = 0;
     int cmp_count = 0;
+    int loop_count = 0;
     long long start = get_current_timestamp();
     for(int i=0;i<len;i++){
         int sorted = 1;
         for(int j=0; j<len-i-1;j++){
+            loop_count++;
             if(cmp(a[j], a[j+1], &cmp_count) > 0){
                 swap(a, j, j+1, &swap_count);
                 sorted = 0;
             }
         }
         if(sorted == 1){    // 一轮比较下来没有发生交换，可以说明已经有序了
-            long long end = get_current_timestamp();
-            printf("bubble_2 time take = %lld(ms)\n", end-start);
-            printf("bubble_2 swap count num = %d\n", swap_count);
-            printf("bubble_2 cmp count num = %d\n", cmp_count);
-            return;
+            break;
         }
     }
     long long end = get_current_timestamp();
-    printf("bubble_2 time take = %lld(ms)\n", end-start);
-    printf("bubble_2 swap count num = %d\n", swap_count);
-    printf("bubble_2 cmp count num = %d\n", cmp_count);
+    printf("bubble_2 time take = %lld(ms), swap count num = %d, cmp count num = %d, loop count num = %d\n", end-start, swap_count, cmp_count, loop_count);
 }
 
 

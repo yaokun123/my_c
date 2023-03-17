@@ -6,25 +6,21 @@
 #include "000tool.h"
 
 void selection(int array[], int len){
+    int swap_count = 0;
+    int cmp_count = 0;
+    int loop_count = 0;
+    long long start = get_current_timestamp();
     for(int i=0;i<len;i++){
         int index = 0;
         for(int j=1;j<len-i;j++){
-            if(array[index] < array[j]){
+            loop_count++;
+            if(cmp(array[j], array[index], &cmp_count) > 0){
                 index = j;
             }
         }
 
-        int tmp = array[index];
-        array[index] = array[len-i-1];
-        array[len-i-1] = tmp;
+        swap(array, index, len-i-1, &swap_count);
     }
-}
-
-int main_2(){
-    int a[] = {5, 8, 1, 10, 3, 2, 111};
-    int len = sizeof(a)/sizeof(int);
-    print_array(a, len);
-    selection(a, len);
-    print_array(a, len);
-    return 0;
+    long long end = get_current_timestamp();
+    printf("selection time take = %lld(ms), swap count num = %d, cmp count num = %d, loop count num = %d\n", end-start, swap_count, cmp_count, loop_count);
 }
